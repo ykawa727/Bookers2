@@ -1,1 +1,28 @@
+<%= render 'books/bubun', user: @bubun_user %>
 
+  <div class="col-md-8 offset-md-1">
+    <h2>Books</h2>
+      <table class="table table-hover table-inverse">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Title</th>
+            <th>Opinion</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @user_book.each do |u| %>
+          <tr>
+            <td><%= link_to user_path(u.id) do %>
+            <%= attachment_image_tag @user, :profile_image, :fill, 40, 40, format:'jpeg', fallback:"no_image.jpg" %>
+            <% end %>
+            </td>
+            <td><%= link_to u.title, book_path(u.id) %></td>
+            <td><%= u.body %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+  </div>

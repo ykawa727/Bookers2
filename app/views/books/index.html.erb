@@ -1,25 +1,27 @@
-<%= render 'books/bubun', user: @user%>
+<%= render 'books/bubun', user: @bubun_user %>
 
-      <div class="col-md-8 offset-md-1">
-        <h2>Books</h2>
-        <table class="table table-hover table-inverse">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Title</th>
-              <th>Opinion</th>
-              <th colspan="3"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @books.each do |b| %>
-            <tr>
-              <td><%= b.bookpost_id %></td>
-              <td><%= b.title %></td>
-              <td><%= b.body %></td>
-            </tr>
-            <% end %>
-
-          </tbody>
-        </table>
-      </div>
+  <div class="col-md-8 offset-md-1">
+    <h2>Books</h2>
+      <table class="table table-hover table-inverse">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Title</th>
+            <th>Opinion</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @books.each do |b| %>
+          <tr>
+            <td><%= link_to user_path(b.user.id) do %>
+              <%= attachment_image_tag b.user, :profile_image, :fill, 40, 40, format:'jpeg', fallback:"no_image.jpg" %>
+              <% end %>
+            </td>
+            <td><%= link_to b.title, book_path(b.id) %></td>
+            <td><%= b.body %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+  </div>

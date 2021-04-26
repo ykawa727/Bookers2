@@ -4,17 +4,27 @@ class BooksController < ApplicationController
 
   def create
     book = Book.new(book_params)
+    book.user_id = current_user.id
     book.save
-    redirect_to book_path(current_user)
+    redirect_to book_path(book.id)
   end
 
   def index
     @book = Book.new
     @books = Book.all
-    @user = User.find(current_user.id)
+    #部分テンプレートへ
+    @bubun_user = User.find(current_user.id)
   end
 
   def show
+    @book = Book.find(params[:id])
+    @book_user = @book.user
+    #部分テンプレートへ
+    @bubun_user = User.find(current_user.id)
+  end
+
+  def edit
+    @book = Book.find(params[:id])
   end
 
   def destroy
@@ -22,7 +32,7 @@ class BooksController < ApplicationController
 
   private
   def book_params
-    params.require(:book).permit(:title, :body, :user_id)
+    params.require(:book).permit(:title, :body)
   end
 
 end
