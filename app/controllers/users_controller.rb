@@ -3,7 +3,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user_book = @user.books
     #部分テンプレートへ
-    @bubun_user = User.find(current_user.id)
+    # @bubun_user = User.find(current_user.id)
   end
 
   def index
@@ -13,9 +13,23 @@ class UsersController < ApplicationController
     @book = Book.new
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      flash[:notice] = "You have updated user successfully."
+      redirect_to user_path(@user)
+    else
+      render :edit
+    end
+  end
+
   private
   def user_params
-    params.require(:list).permit(:title, :body, :profile_image)
+    params.require(:user).permit(:name, :introduction, :profile_image)
   end
 
 end

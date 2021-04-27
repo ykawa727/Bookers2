@@ -13,7 +13,9 @@
  *= require_tree .
  *= require_self
  */
- @import "bootstrap";
+@import "bootstrap";
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
 
   .navbar {
     position: relative;
@@ -44,4 +46,14 @@
   li {
     display: list-item;
     text-align: -webkit-match-parent;
+  }
+
+  content_tag {
+  background-color: white;
+  color: #green;
+  }
+
+  .alert {
+  background-color: white;
+  color: #green;
   }
